@@ -431,7 +431,7 @@ npx hardhat verify --network sepolia <CONTRACT_ADDRESS> 0x75b923d7940E1BD6689EbF
 
 - [Full Tutorial Track Documentation](../../../frontend/src/pages/Docs.tsx) - Complete educational guide
 - [Zama FHEVM Documentation](https://docs.zama.org/) - Official FHEVM docs
-- [GitHub Repository](https://github.com/zacnider/entrofhe/tree/main/examples/advanced-entropynft) - Source code
+- [GitHub Repository](https://github.com/zacnider/fhevm-example-advanced-entropynft) - Source code
 
 ## 📝 License
 
