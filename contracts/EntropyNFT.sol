@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import {FHE, euint64} from "@fhevm/solidity/lib/FHE.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 import "./IEntropyOracle.sol";
 
 /**
@@ -18,7 +19,7 @@ import "./IEntropyOracle.sol";
  * - IPFS metadata storage
  * - Off-chain trait selection with on-chain storage
  */
-contract EntropyNFT is ERC721, ERC721URIStorage, Ownable {
+contract EntropyNFT is ERC721, ERC721URIStorage, Ownable, ZamaEthereumConfig {
     IEntropyOracle public entropyOracle;
     
     // NFT traits
