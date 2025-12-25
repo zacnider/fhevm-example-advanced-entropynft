@@ -1,6 +1,10 @@
 # EntropyNFT
 
-ERC721 NFT with trait selection using entropy
+Learn how to create NFTs with encrypted metadata
+
+## 🎓 What You'll Learn
+
+This example teaches you how to use FHEVM to build privacy-preserving smart contracts. You'll learn step-by-step how to implement encrypted operations, manage permissions, and work with encrypted data.
 
 ## 🚀 Quick Start
 
@@ -48,14 +52,14 @@ ERC721 NFT with trait selection using entropy
 
 ---
 
-## 📋 Overview
+## 📚 Overview
 
 @title EntropyNFT
 @notice ERC721 NFT with trait selection using entropy
-@dev Real ERC721 NFT contract with trait selection using EntropyOracle
-This example shows:
+@dev Real ERC721 NFT contract with trait selection using encrypted randomness
+In this example, you will learn:
 - ERC721 NFT implementation
-- Using entropy oracle for trait selection
+- Using encrypted randomness for trait selection
 - IPFS metadata storage
 - Off-chain trait selection with on-chain storage
 
@@ -101,11 +105,11 @@ This example shows:
 
 
 
-## 🔐 Zama FHEVM Usage
+## 🔐 Learn Zama FHEVM Through This Example
 
-This example demonstrates the following **Zama FHEVM** features:
+This example teaches you how to use the following **Zama FHEVM** features:
 
-### Zama FHEVM Features Used
+### What You'll Learn About
 
 - **ZamaEthereumConfig**: Inherits from Zama's network configuration
   ```solidity
@@ -120,6 +124,7 @@ This example demonstrates the following **Zama FHEVM** features:
   - `FHE.mul()` - Zama FHEVM operation
   - `FHE.eq()` - Zama FHEVM operation
   - `FHE.xor()` - Zama FHEVM operation
+  - `FHE.allowThis()` - Zama FHEVM operation
 
 - **Encrypted Types**: Uses Zama's encrypted integer types
   - `euint64` - 64-bit encrypted unsigned integer
@@ -144,31 +149,29 @@ import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 ### Zama FHEVM Code Example
 
 ```solidity
-// Using Zama FHEVM's encrypted integer type
-euint64 private encryptedValue;
-
-// Converting external encrypted value to internal (Zama FHEVM)
-euint64 internalValue = FHE.fromExternal(encryptedValue, inputProof);
-FHE.allowThis(internalValue); // Zama FHEVM permission system
-
-// Performing encrypted operations using Zama FHEVM
-euint64 result = FHE.add(encryptedValue, FHE.asEuint64(1));
+// Advanced Zama FHEVM usage patterns
+euint64 result = FHE.add(value1, value2);
 FHE.allowThis(result);
+
+// Combining multiple Zama FHEVM operations
+euint64 entropy = entropyOracle.getEncryptedEntropy(requestId);
+FHE.allowThis(entropy);
+euint64 finalResult = FHE.xor(result, entropy);
+FHE.allowThis(finalResult);
 ```
 
-### Zama FHEVM Concepts Demonstrated
+### FHEVM Concepts You'll Learn
 
-1. **Encrypted Arithmetic**: Using Zama FHEVM to encrypted arithmetic
-2. **Encrypted Comparison**: Using Zama FHEVM to encrypted comparison
-3. **External Encryption**: Using Zama FHEVM to external encryption
-4. **Permission Management**: Using Zama FHEVM to permission management
-5. **Entropy Integration**: Using Zama FHEVM to entropy integration
+1. **Complex FHE Operations**: Learn how to use Zama FHEVM for complex fhe operations
+2. **Real-World Applications**: Learn how to use Zama FHEVM for real-world applications
+3. **Entropy Integration**: Learn how to use Zama FHEVM for entropy integration
 
 ### Learn More About Zama FHEVM
 
 - 📚 [Zama FHEVM Documentation](https://docs.zama.org/protocol)
 - 🎓 [Zama Developer Hub](https://www.zama.org/developer-hub)
 - 💻 [Zama FHEVM GitHub](https://github.com/zama-ai/fhevm)
+
 
 
 ## 🔍 Contract Code
@@ -181,6 +184,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import {FHE, euint64} from "@fhevm/solidity/lib/FHE.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 import "./IEntropyOracle.sol";
 
 /**
@@ -194,7 +198,7 @@ import "./IEntropyOracle.sol";
  * - IPFS metadata storage
  * - Off-chain trait selection with on-chain storage
  */
-contract EntropyNFT is ERC721, ERC721URIStorage, Ownable {
+contract EntropyNFT is ERC721, ERC721URIStorage, Ownable, ZamaEthereumConfig {
     IEntropyOracle public entropyOracle;
     
     // NFT traits
