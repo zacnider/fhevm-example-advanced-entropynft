@@ -1,15 +1,15 @@
 # EntropyNFT
 
-ERC721 NFT with trait selection using entropy
+Learn how to create NFTs with encrypted metadata
 
-## Overview
+## 📚 Overview
 
 @title EntropyNFT
 @notice ERC721 NFT with trait selection using entropy
-@dev Real ERC721 NFT contract with trait selection using EntropyOracle
-This example shows:
+@dev Real ERC721 NFT contract with trait selection using encrypted randomness
+In this example, you will learn:
 - ERC721 NFT implementation
-- Using entropy oracle for trait selection
+- Using encrypted randomness for trait selection
 - IPFS metadata storage
 - Off-chain trait selection with on-chain storage
 
@@ -65,6 +65,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import {FHE, euint64} from "@fhevm/solidity/lib/FHE.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 import "./IEntropyOracle.sol";
 
 /**
@@ -78,7 +79,7 @@ import "./IEntropyOracle.sol";
  * - IPFS metadata storage
  * - Off-chain trait selection with on-chain storage
  */
-contract EntropyNFT is ERC721, ERC721URIStorage, Ownable {
+contract EntropyNFT is ERC721, ERC721URIStorage, Ownable, ZamaEthereumConfig {
     IEntropyOracle public entropyOracle;
     
     // NFT traits
